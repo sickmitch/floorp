@@ -57,51 +57,92 @@ tab.tabbrowser-tab *{
 /*============================================================================================*/
 /* NAV BAR */
 
-#urlbar .search-one-offs {
-  display: none !important;
+:root{
+  --uc-autohide-toolbox-delay: 200ms; /* Wait 0.1s before hiding toolbars */
+  --uc-toolbox-rotation: 82deg;  /* This may need to be lower on mac - like 75 or so */
 }
 
-/* Ensure the navigator toolbox is positioned correctly */
-#navigator-toolbox {
-  position: fixed !important; /* Ensure it stays at the top */
-  top: 0; /* Align to the top of the window */
-  left: 0; /* Align to the left of the window */
-  width: 100%; /* Full width */
-  z-index: 1; /* Ensure it is above other elements */
+:root[sizemode="maximized"]{
+  --uc-toolbox-rotation: 88.5deg;
 }
 
-/* Hide the nav bar by default */
-#nav-bar {
-  min-height: 0 !important;
-  max-height: 0 !important;
-  height: 0 !important;
+@media  (-moz-platform: windows){
+  :root:not([lwtheme]) #navigator-toolbox{ background-color: -moz-dialog !important; }
+}
+
+:root[sizemode="fullscreen"],
+:root[sizemode="fullscreen"] #navigator-toolbox{ margin-top: 0 !important; }
+
+#navigator-toolbox{
+  --browser-area-z-index-toolbox: 3;
+  position: fixed !important;
+  background-color: var(--lwt-accent-color,black) !important;
+  transition: transform 82ms linear, opacity 82ms linear !important;
+  transition-delay: var(--uc-autohide-toolbox-delay) !important;
+  transform-origin: top;
+  transform: rotateX(var(--uc-toolbox-rotation));
   opacity: 0;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  position: fixed; /* Ensure it is fixed to the top */
-  top: 0; /* Align to the top of the window */
-  left: 0; /* Align to the left of the window */
-  width: 100%; /* Full width */
+  line-height: 0;
+  z-index: 1;
+  pointer-events: none;
 }
-
-/* Show on hover */
-#nav-bar:hover,
-#navigator-toolbox:focus-within #nav-bar,
-#navigator-toolbox:hover #nav-bar {
-  min-height: 50px !important;
-  max-height: 50px !important;
-  height: 50px !important;
+:root[sessionrestored] #urlbar[popover]{
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 82ms linear var(--uc-autohide-toolbox-delay), opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
+  transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+  transform: rotateX(89.9deg);
+}
+#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox #urlbar[popover],
+#navigator-toolbox:is(:hover,:focus-within) #urlbar[popover],
+#urlbar-container > #urlbar[popover]:is([focused],[open]){
+  pointer-events: auto;
+  opacity: 1;
+  transition-delay: 33ms;
+  transform: rotateX(0deg);
+}
+#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox,
+#navigator-toolbox:has(#urlbar:is([open],[focus-within])),
+#navigator-toolbox:hover,
+#navigator-toolbox:focus-within{
+  transition-delay: 33ms !important;
+  transform: rotateX(0);
   opacity: 1;
 }
 
-/* Ensure tabs touch the top of the window when URL bar is hidden */
-#titlebar {
-  margin-bottom: 0 !important;
+#navigator-toolbox > *{ line-height: normal; pointer-events: auto }
+
+#navigator-toolbox,
+#navigator-toolbox > *{
+  width: 100vw;
+  height: 55px !important;
+  -moz-appearance: none !important;
 }
 
-#navigator-toolbox:hover #nav-bar::after {
-  opacity: 1;
+/* Don't apply transform before window has been fully created */
+:root:not([sessionrestored]) #navigator-toolbox{ transform:none !important }
+
+:root[customizing] #navigator-toolbox{
+  position: relative !important;
+  transform: none !important;
+  opacity: 1 !important;
 }
+
+#nav-bar-customization-target, #navigator-toolbox {
+  background-color: #1a1a1a !important;
+}
+
+#urlbar {
+  transform: translateY(12px) !important;
+}
+
+.urlbar-input-container {
+  height: 30px !important;
+}
+
+
+#navigator-toolbox[inFullscreen] > #PersonalToolbar,
+#PersonalToolbar[collapsed="true"]{ display: none }
 
 #PanelUI-menu-button,
 #undo-closed-tab,
@@ -110,8 +151,7 @@ tab.tabbrowser-tab *{
 #unified-extensions-button,
 #fxa-toolbar-menu-button,
 #downloads-button {
-  transform: translateY(5px) !important;
-  transform: translateX(-40px) !important;
+  transform: translateX(-280px) translateY(-1px) !important;
 }
 
 /* Hide X top-left */
@@ -718,7 +758,7 @@ tab,
   width: var(--sidebar-width) !important;
   max-width: var(--sidebar-width) !important;
   padding-left: 3px !important;
-  margin-top: 40px !important;
+  margin-top: -5px !important;
   margin-bottom: -5px !important;
   z-index: 1;
 }
