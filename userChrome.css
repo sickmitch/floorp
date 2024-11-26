@@ -2,9 +2,9 @@
 
 /* Fonts */
 
-/* * {
+* {
   font-family: monospace !important;
-} */
+}
 
 /*------------------------------------------------*/
 /* Background Color */
@@ -55,106 +55,8 @@ tab.tabbrowser-tab *{
 }
 
 /*============================================================================================*/
-/* NAV BAR */
 
-:root{
-  --uc-autohide-toolbox-delay: 200ms; /* Wait 0.1s before hiding toolbars */
-  --uc-toolbox-rotation: 82deg;  /* This may need to be lower on mac - like 75 or so */
-}
-
-:root[sizemode="maximized"]{
-  --uc-toolbox-rotation: 88.5deg;
-}
-
-@media  (-moz-platform: windows){
-  :root:not([lwtheme]) #navigator-toolbox{ background-color: -moz-dialog !important; }
-}
-
-:root[sizemode="fullscreen"],
-:root[sizemode="fullscreen"] #navigator-toolbox{ margin-top: 0 !important; }
-
-#navigator-toolbox{
-  --browser-area-z-index-toolbox: 3;
-  position: fixed !important;
-  background-color: var(--lwt-accent-color,black) !important;
-  transition: transform 82ms linear, opacity 82ms linear !important;
-  transition-delay: var(--uc-autohide-toolbox-delay) !important;
-  transform-origin: top;
-  transform: rotateX(var(--uc-toolbox-rotation));
-  opacity: 0;
-  line-height: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-:root[sessionrestored] #urlbar[popover]{
-  pointer-events: none;
-  opacity: 0;
-  transition: transform 82ms linear var(--uc-autohide-toolbox-delay), opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
-  transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
-  transform: rotateX(89.9deg);
-}
-#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox #urlbar[popover],
-#navigator-toolbox:is(:hover,:focus-within) #urlbar[popover],
-#urlbar-container > #urlbar[popover]:is([focused],[open]){
-  pointer-events: auto;
-  opacity: 1;
-  transition-delay: 33ms;
-  transform: rotateX(0deg);
-}
-#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox,
-#navigator-toolbox:has(#urlbar:is([open],[focus-within])),
-#navigator-toolbox:hover,
-#navigator-toolbox:focus-within{
-  transition-delay: 33ms !important;
-  transform: rotateX(0);
-  opacity: 1;
-}
-
-#navigator-toolbox > *{ line-height: normal; pointer-events: auto }
-
-#navigator-toolbox,
-#navigator-toolbox > *{
-  width: 100vw;
-  height: 55px !important;
-  -moz-appearance: none !important;
-}
-
-/* Don't apply transform before window has been fully created */
-:root:not([sessionrestored]) #navigator-toolbox{ transform:none !important }
-
-:root[customizing] #navigator-toolbox{
-  position: relative !important;
-  transform: none !important;
-  opacity: 1 !important;
-}
-
-#nav-bar-customization-target, #navigator-toolbox {
-  background-color: #1a1a1a !important;
-}
-
-#urlbar {
-  transform: translateY(12px) !important;
-}
-
-.urlbar-input-container {
-  height: 30px !important;
-}
-
-
-#navigator-toolbox[inFullscreen] > #PersonalToolbar,
-#PersonalToolbar[collapsed="true"]{ display: none }
-
-#PanelUI-menu-button,
-#undo-closed-tab,
-#addon_darkreader_org-browser-action,
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action,
-#unified-extensions-button,
-#fxa-toolbar-menu-button,
-#downloads-button {
-  transform: translateX(-280px) translateY(-1px) !important;
-}
-
-/* Hide X top-left */
+/* Hide top crap */
 #floorp-tabbar-window-manage-container > hbox:nth-child(1) > toolbarbutton:nth-child(4) {
   display: none !important;
 }
@@ -164,6 +66,7 @@ tab.tabbrowser-tab *{
   display: none !important;
 }
 
+/* padding top elements */ 
 #nav-bar #PanelUI-button #PanelUI-menu-button {
   padding-right: 20px !important;
 }
@@ -245,12 +148,6 @@ tab.tabbrowser-tab *{
 #nav-bar {
     margin-left: 35px !important;
 }
-
-#urlbar-container {
-    min-width: 0px !important;
-    flex: auto !important;
-}
-
 
 @media screen and (max-width:100px) {
     #TabsToolbar {
@@ -397,6 +294,106 @@ tab,
 
 
 /*============================================================================================*/
+/* NAV BAR */
+
+:root{
+  --uc-autohide-toolbox-delay: 200ms; /* Wait 0.1s before hiding toolbars */
+  --uc-toolbox-rotation: 82deg;  /* This may need to be lower on mac - like 75 or so */
+}
+
+:root[sizemode="maximized"]{
+  --uc-toolbox-rotation: 88.5deg;
+}
+
+@media  (-moz-platform: windows){
+  :root:not([lwtheme]) #navigator-toolbox{ background-color: -moz-dialog !important; }
+}
+
+:root[sizemode="fullscreen"],
+:root[sizemode="fullscreen"] #navigator-toolbox{ margin-top: 0 !important; }
+
+#navigator-toolbox{
+  --browser-area-z-index-toolbox: 3;
+  position: fixed !important;
+  background-color: var(--lwt-accent-color,black) !important;
+  transition: transform 82ms linear, opacity 82ms linear !important;
+  transition-delay: var(--uc-autohide-toolbox-delay) !important;
+  transform-origin: top;
+  transform: rotateX(var(--uc-toolbox-rotation));
+  opacity: 0;
+  line-height: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+:root[sessionrestored] #urlbar[popover]{
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 82ms linear var(--uc-autohide-toolbox-delay), opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
+  transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+  transform: rotateX(89.9deg);
+}
+#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox #urlbar[popover],
+#navigator-toolbox:is(:hover,:focus-within) #urlbar[popover],
+#urlbar-container > #urlbar[popover]:is([focused],[open]){
+  pointer-events: auto;
+  opacity: 1;
+  transition-delay: 33ms;
+  transform: rotateX(0deg);
+}
+#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox,
+#navigator-toolbox:has(#urlbar:is([open],[focus-within])),
+#navigator-toolbox:hover,
+#navigator-toolbox:focus-within{
+  transition-delay: 33ms !important;
+  transform: rotateX(0);
+  opacity: 1;
+}
+
+#navigator-toolbox > *{ line-height: normal; pointer-events: auto }
+
+#navigator-toolbox,
+#navigator-toolbox > *{
+  width: 100vw;
+  height: 45px !important;
+}
+
+/* Don't apply transform before window has been fully created */
+:root:not([sessionrestored]) #navigator-toolbox{ transform:none !important }
+
+:root[customizing] #navigator-toolbox{
+  position: relative !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+#nav-bar-customization-target, #navigator-toolbox {
+  background-color: #1a1a1a !important;
+}
+
+.urlbar-input-container {
+  height: 30px !important;
+}
+
+#urlbar {
+  display: flex !important; /* Enable flexbox */
+  align-items: center !important; /* Center vertically */
+}
+
+#navigator-toolbox[inFullscreen] > #PersonalToolbar,
+#PersonalToolbar[collapsed="true"]{ display: none }
+
+#PanelUI-menu-button,
+#undo-closed-tab,
+#addon_darkreader_org-browser-action,
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action,
+#unified-extensions-button,
+#fxa-toolbar-menu-button,
+#downloads-button {
+  display: flex !important; /* Enable flexbox */
+  align-items: center !important; /* Center vertically */
+  transform: translateX(-280px) !important;
+}
+
 /* URL BAR */
 
 /* Make text in URL bar in the center */
@@ -411,10 +408,10 @@ tab,
     max-width: 1000px;
     min-width: 200px;
     margin: auto !important;
-    margin-top: 7px !important; /* Adjust this value to move it down */
 }
 
 #main-window #urlbar {
+    display: block !important;
     width: 100% !important;
     margin-top: 0 !important;
     margin-left: 0 !important;
