@@ -383,15 +383,28 @@ tab,
 #PersonalToolbar[collapsed="true"]{ display: none }
 
 #PanelUI-menu-button,
-#undo-closed-tab,
-#addon_darkreader_org-browser-action,
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action,
 #unified-extensions-button,
 #fxa-toolbar-menu-button,
 #downloads-button {
   display: flex !important; /* Enable flexbox */
   align-items: center !important; /* Center vertically */
-  transform: translateX(-280px) !important;
+  transform: translateX(80px) !important;
+}
+#undo-closed-tab{
+  display: flex !important; /* Enable flexbox */
+  align-items: center !important; /* Center vertically */
+  transform: translateX(-40px) !important;
+}
+#jordanlinkwarden_gmail_com-BAP,
+#addon_darkreader_org-browser-action,
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action {
+  display: flex !important; /* Enable flexbox */
+  align-items: center !important; /* Center vertically */
+  transform: translateX(-1100px) !important;
+}
+
+#unified-extensions-button::after{
+  display: none !important;
 }
 
 /* URL BAR */
@@ -405,9 +418,9 @@ tab,
 
 #urlbar-container {
     flex: 1;
-    max-width: 1000px;
+    max-width: 800px;
     min-width: 200px;
-    margin: auto !important;
+    margin-left: 500px !important;
 }
 
 #main-window #urlbar {
@@ -426,7 +439,7 @@ tab,
     right: 0;
     margin-left: auto !important;
     margin-right: auto !important;
-    margin-top: 3vh !important;
+    margin-top: 2px !important;
     transition: width 0.3s ease, left 0.3s ease, margin-top 0.3s ease, margin-left 0.3s ease, margin-right 0.3s ease;
 }
 
@@ -443,8 +456,16 @@ tab,
     text-align: center !important;
 }
 
-#urlbar:not([breakout][breakout-extend]) #urlbar-input {
+#urlbar[focused] #urlbar-input {
     text-align: center !important;
+}
+
+#urlbar[breakout][breakout-extend] #urlbar-input {
+    text-align: center !important;
+}
+
+#floorp-tabbar-window-manage-container > hbox:nth-child(1) > toolbarbutton:nth-child(1){
+  display: none !important;
 }
 
 /*------------------------------------------------*/
@@ -754,9 +775,8 @@ tab,
   min-width: var(--sidebar-width) !important;
   width: var(--sidebar-width) !important;
   max-width: var(--sidebar-width) !important;
-  padding-left: 3px !important;
-  margin-top: -5px !important;
-  margin-bottom: -5px !important;
+  margin-top: -12px !important;
+  margin-bottom: -12px !important;
   z-index: 1;
 }
 
@@ -829,7 +849,7 @@ tab,
 @media (prefers-color-scheme: dark) {
     #main-window:not([sizemode="fullscreen"]) #appcontent browser {
         border-radius: 15px !important;
-        margin: 10px 10px 10px 15px !important;
+        margin: 2px 2px 2px 13px !important;
         border: 2px solid rgba(0, 0, 0, 0);
         transition: border 0.3s ease;
         box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
