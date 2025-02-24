@@ -1,3 +1,3 @@
 # Custom CSS
 
-Put in ~/.firefox/XXXXXX.default-release/chrome/
+Put in ~/.{firefox,floorp,..}/XXXXXX.default-release/chrome/
