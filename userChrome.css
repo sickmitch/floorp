@@ -727,7 +727,7 @@ tab,
 /* Expand Side bar on hover */
 
 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
-  --sidebar-width: 36px;
+  --sidebar-width: 2px;
   --sidebar-hover-width: 400px;
   position: relative;
   min-width: var(--sidebar-width) !important;
