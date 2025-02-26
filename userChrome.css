@@ -37,7 +37,7 @@ tab.tabbrowser-tab *{
 }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prVefers-color-scheme: dark) {
 #navigator-toolbox  {
   background: #1a1a1a !important;
 }
@@ -57,11 +57,15 @@ tab.tabbrowser-tab *{
 /*============================================================================================*/
 
 /* Hide top crap */
-#floorp-tabbar-window-manage-container > hbox:nth-child(1) > toolbarbutton:nth-child(4) {
-  display: none !important;
-}
-
+#floorp-tabbar-window-manage-container > hbox:nth-child(1) > toolbarbutton:nth-child(4),
+#PanelUI-button,
+#reload-button,
+#sidebar-button,
+#sidebar-reverse-position-toolbar,
+#workspaces-toolbar-button,
+#firefox-view-button,
 #back-button,
+#profile-manager,
 #forward-button {
   display: none !important;
 }
@@ -113,21 +117,34 @@ tab.tabbrowser-tab *{
 }
 
 /* Change the order of elements */
-#urlbar-container {
+#PanelUI-menu-button,
+#unified-extensions-button,
+#fxa-toolbar-menu-button,
+#downloads-button,
+#undo-closed-tab {
   order: 0 !important;
 }
 
 #undo-closed-tab {
+  margin-left: 400px !important;
+}
+
+#urlbar-container {
   order: 1 !important;
 }
 
-#appMenu-popup {
-  margin-inline: -244px !important;
+/* #jordanlinkwarden_gmail_com-BAP{
+  transform: translateX(200px) !important;
+} */
+
+#addon_darkreader_org-browser-action,
+#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action {
+  order: 2 !important;
 }
 
-#widget-overflow {
-	margin-inline: -320px !important;
-  }  
+#unified-extensions-button::after{
+  display: none !important;
+}
 
 /*------------------------------------------------*/
 /* Make Tab Bar join with URL Bar on the left */
@@ -305,57 +322,37 @@ tab,
   --uc-toolbox-rotation: 88.5deg;
 }
 
-@media  (-moz-platform: windows){
-  :root:not([lwtheme]) #navigator-toolbox{ background-color: -moz-dialog !important; }
+@media (-moz-platform: windows) {
+  :root:not([lwtheme]) #navigator-toolbox {
+    background-color: -moz-dialog !important;
+  }
 }
 
-:root[sizemode="fullscreen"],
-:root[sizemode="fullscreen"] #navigator-toolbox{ margin-top: 0 !important; }
-
-#navigator-toolbox{
-  --browser-area-z-index-toolbox: 3;
-  position: fixed !important;
-  background-color: var(--lwt-accent-color,black) !important;
-  transition: transform 82ms linear, opacity 82ms linear !important;
-  transition-delay: var(--uc-autohide-toolbox-delay) !important;
-  transform-origin: top;
-  transform: rotateX(var(--uc-toolbox-rotation));
-  opacity: 0;
-  line-height: 0;
-  z-index: 1;
-  pointer-events: none;
-}
-:root[sessionrestored] #urlbar[popover]{
-  pointer-events: none;
-  opacity: 0;
-  transition: transform 82ms linear var(--uc-autohide-toolbox-delay), opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
-  transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
-  transform: rotateX(89.9deg);
-}
-#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox #urlbar[popover],
-#navigator-toolbox:is(:hover,:focus-within) #urlbar[popover],
-#urlbar-container > #urlbar[popover]:is([focused],[open]){
-  pointer-events: auto;
-  opacity: 1;
-  transition-delay: 33ms;
-  transform: rotateX(0deg);
-}
-#mainPopupSet:has(> [role="group"][panelopen]) ~ toolbox,
-#navigator-toolbox:has(#urlbar:is([open],[focus-within])),
-#navigator-toolbox:hover,
-#navigator-toolbox:focus-within{
-  transition-delay: 33ms !important;
-  transform: rotateX(0);
-  opacity: 1;
+:root[sizemode="fullscreen"] #navigator-toolbox {
+  margin-top: 0 !important;
 }
 
-#navigator-toolbox > *{ line-height: normal; pointer-events: auto }
-
-#navigator-toolbox,
-#navigator-toolbox > *{
-  width: 100vw;
-  height: 45px !important;
+/* HOVERING*/
+#nav-bar {
+  min-height: 0 !important;
+  max-height: 0 !important;
+  height: 0 !important;
+  --moz-transform: scaleY(0) !important;
+  transform: scaleY(0) !important;
+  transition: all 0.1s ease !important;
 }
+
+#titlebar:hover~#nav-bar,
+#nav-bar:hover,
+#nav-bar:focus-within {
+  --moz-transform: scale(1) !important;
+  transform: scale(1) !important;
+  max-height: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  z-index: 1  !important;
+}
+
 
 /* Don't apply transform before window has been fully created */
 :root:not([sessionrestored]) #navigator-toolbox{ transform:none !important }
@@ -364,10 +361,6 @@ tab,
   position: relative !important;
   transform: none !important;
   opacity: 1 !important;
-}
-
-#nav-bar-customization-target, #navigator-toolbox {
-  background-color: #1a1a1a !important;
 }
 
 .urlbar-input-container {
@@ -382,30 +375,6 @@ tab,
 #navigator-toolbox[inFullscreen] > #PersonalToolbar,
 #PersonalToolbar[collapsed="true"]{ display: none }
 
-#PanelUI-menu-button,
-#unified-extensions-button,
-#fxa-toolbar-menu-button,
-#downloads-button {
-  display: flex !important; /* Enable flexbox */
-  align-items: center !important; /* Center vertically */
-  transform: translateX(80px) !important;
-}
-#undo-closed-tab{
-  display: flex !important; /* Enable flexbox */
-  align-items: center !important; /* Center vertically */
-  transform: translateX(-40px) !important;
-}
-#jordanlinkwarden_gmail_com-BAP,
-#addon_darkreader_org-browser-action,
-#_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action {
-  display: flex !important; /* Enable flexbox */
-  align-items: center !important; /* Center vertically */
-  transform: translateX(-1100px) !important;
-}
-
-#unified-extensions-button::after{
-  display: none !important;
-}
 
 /* URL BAR */
 
@@ -418,9 +387,8 @@ tab,
 
 #urlbar-container {
     flex: 1;
-    max-width: 800px;
+    max-width: 600px;
     min-width: 200px;
-    margin-left: 500px !important;
 }
 
 #main-window #urlbar {
@@ -476,24 +444,11 @@ tab,
   }
 }
 
-@media (prefers-color-scheme: light)  {
-  #urlbar-background {
-    background-color: #d6d6d6 !important;
-  }
-}
-
 @media (prefers-color-scheme: dark) {
 #urlbar-results > *[selected=""]  {
   background-color: #424242 !important;
 }
 }
-
-@media (prefers-color-scheme: light)  {
-#urlbar-results > *[selected=""]  {
-  background-color: #e8e8e8 !important;
-}
-}
-
 
 /*------------------------------------------------*/
 /* Hide and Hover icons in URL Bar */
@@ -593,6 +548,7 @@ tab,
 
 /*------------------------------------------------*/
 /* Create visual dots on both sides */
+
 #identity-box::after,
 #page-action-buttons::before {
   position: relative;
@@ -600,7 +556,9 @@ tab,
   pointer-events: none;
   transition: opacity 100ms ease;
   align-self: center;
-  font-size: 0.7em;
+  font-size: 1,5em;
+  display: flex !important;
+  margin-top: 2px !important;
 }
 
 #identity-box::after,
@@ -770,7 +728,7 @@ tab,
 
 #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
   --sidebar-width: 36px;
-  --sidebar-hover-width: 512px;
+  --sidebar-hover-width: 400px;
   position: relative;
   min-width: var(--sidebar-width) !important;
   width: var(--sidebar-width) !important;
@@ -849,7 +807,7 @@ tab,
 @media (prefers-color-scheme: dark) {
     #main-window:not([sizemode="fullscreen"]) #appcontent browser {
         border-radius: 15px !important;
-        margin: 2px 2px 2px 13px !important;
+        margin: 2px 2px 2px 10px !important;
         border: 2px solid rgba(0, 0, 0, 0);
         transition: border 0.3s ease;
         box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
