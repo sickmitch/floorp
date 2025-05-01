@@ -4,6 +4,7 @@
 
 * {
   font-family: monospace !important;
+
 }
 
 /*------------------------------------------------*/
@@ -89,14 +90,6 @@ tab.tabbrowser-tab *{
 }
 
 /*------------------------------------------------*/
-/* Remove line between website content and top bar */
-
-#navigator-toolbox {
-  border-bottom: var(--firefoxcss-top-bar-border-bottom-size) solid
-    var(--firefoxcss-top-bar-border-bottom-color) !important;
-}
-
-/*------------------------------------------------*/
 /* Remove the all tab and new tab button */
 #alltabs-button,
 #tabs-newtab-button {
@@ -110,10 +103,13 @@ tab.tabbrowser-tab *{
   display: none !important;
 }
 
-/* Move the navigation buttons to the right */
 #nav-bar-customization-target {
   display: flex !important;
   flex-direction: row !important;
+}
+
+#undo-closed-tab {
+  margin-left: 400px !important;
 }
 
 /* Change the order of elements */
@@ -123,23 +119,19 @@ tab.tabbrowser-tab *{
 #downloads-button,
 #undo-closed-tab {
   order: 0 !important;
-}
-
-#undo-closed-tab {
-  margin-left: 400px !important;
+  margin-top: 3px !important;
 }
 
 #urlbar-container {
   order: 1 !important;
+  margin-top: 5px !important;
 }
 
-/* #jordanlinkwarden_gmail_com-BAP{
-  transform: translateX(200px) !important;
-} */
-
 #addon_darkreader_org-browser-action,
+#_6c6751df-7510-4e27-9637-9ae354c86f8c_-BAP,
 #_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action {
-  order: 2 !important;
+  order: 2  !important;
+  margin-top: 3px !important;
 }
 
 #unified-extensions-button::after{
@@ -155,11 +147,6 @@ tab.tabbrowser-tab *{
     --TabsHeight: 36;
     --TabsBorder: 8;
     --NavbarHeightSmall: calc(var(--TabsHeight) + var(--TabsBorder))
-}
-
-#nav-bar {
-    margin-top:calc(var(--TabsHeight) * -1px - var(--TabsBorder) * 1px)!important;
-    height: calc((var(--TabsHeight) * 1px + var(--TabsBorder) * 1px) + 0px)
 }
 
 #nav-bar {
@@ -314,7 +301,7 @@ tab,
 /* NAV BAR */
 
 :root{
-  --uc-autohide-toolbox-delay: 200ms; /* Wait 0.1s before hiding toolbars */
+  --uc-autohide-toolbox-delay: 1000ms; /* Wait 0.1s before hiding toolbars */
   --uc-toolbox-rotation: 82deg;  /* This may need to be lower on mac - like 75 or so */
 }
 
@@ -332,28 +319,6 @@ tab,
   margin-top: 0 !important;
 }
 
-/* HOVERING*/
-#nav-bar {
-  min-height: 0 !important;
-  max-height: 0 !important;
-  height: 0 !important;
-  --moz-transform: scaleY(0) !important;
-  transform: scaleY(0) !important;
-  transition: all 0.1s ease !important;
-}
-
-#titlebar:hover~#nav-bar,
-#nav-bar:hover,
-#nav-bar:focus-within {
-  --moz-transform: scale(1) !important;
-  transform: scale(1) !important;
-  max-height: 36px !important;
-  height: 36px !important;
-  min-height: 36px !important;
-  z-index: 1  !important;
-}
-
-
 /* Don't apply transform before window has been fully created */
 :root:not([sessionrestored]) #navigator-toolbox{ transform:none !important }
 
@@ -368,8 +333,8 @@ tab,
 }
 
 #urlbar {
-  display: flex !important; /* Enable flexbox */
-  align-items: center !important; /* Center vertically */
+  display: flex !important; 
+  align-items: center !important;
 }
 
 #navigator-toolbox[inFullscreen] > #PersonalToolbar,
@@ -381,7 +346,6 @@ tab,
 /* Make text in URL bar in the center */
 
 #nav-bar {
-    display: flex;
     justify-content: center;
 }
 
@@ -558,7 +522,6 @@ tab,
   align-self: center;
   font-size: 1,5em;
   display: flex !important;
-  margin-top: 2px !important;
 }
 
 #identity-box::after,
@@ -733,8 +696,8 @@ tab,
   min-width: var(--sidebar-width) !important;
   width: var(--sidebar-width) !important;
   max-width: var(--sidebar-width) !important;
-  margin-top: -12px !important;
-  margin-bottom: -12px !important;
+  margin-top: -9px !important;
+  margin-bottom: -9px !important;
   z-index: 1;
 }
 
@@ -807,7 +770,7 @@ tab,
 @media (prefers-color-scheme: dark) {
     #main-window:not([sizemode="fullscreen"]) #appcontent browser {
         border-radius: 15px !important;
-        margin: 2px 2px 2px 10px !important;
+        margin: 5px 5px 5px 10px !important;
         border: 2px solid rgba(0, 0, 0, 0);
         transition: border 0.3s ease;
         box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
@@ -876,4 +839,88 @@ tab,
 .browserContainer > findbar .findbar-textbox  {
   border-radius: 10px !important;
   text-align: center  !important;
+}
+
+/*-----------------------------*/
+/* HOVERING NAV-BAR */
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/autohide_toolbox.css made available under Mozilla Public License v. 2.0 */
+
+:root{
+  --uc-autohide-toolbox-delay: 200ms; 
+  --uc-toolbox-rotation: 82deg;  
+}
+
+:root[sizemode="maximized"]{
+  --uc-toolbox-rotation: 88.5deg;
+}
+
+@media  (-moz-platform: windows){
+  :root:not([lwtheme]) #navigator-toolbox{ background-color: -moz-dialog !important; }
+}
+
+:root[sizemode="fullscreen"],
+:root[sizemode="fullscreen"] #navigator-toolbox{ margin-top: 0 !important; }
+
+#navigator-toolbox{
+  --browser-area-z-index-toolbox: 3;
+  position: fixed !important;
+  background-color: var(--lwt-accent-color,black) !important;
+  transition: transform 82ms linear, opacity 82ms linear !important;
+  transition-delay: var(--uc-autohide-toolbox-delay) !important;
+  transform-origin: top;
+  transform: rotateX(var(--uc-toolbox-rotation));
+  opacity: 0;
+  line-height: 0;
+  z-index: 2;
+  pointer-events: none;
+  width: 100vw;
+  height: 40px !important;
+}
+:root[sessionrestored] #urlbar[popover]{
+  pointer-events: none;
+  opacity: 0;
+  transition: transform 82ms linear var(--uc-autohide-toolbox-delay), opacity 0ms calc(var(--uc-autohide-toolbox-delay) + 82ms);
+  transform-origin: 0px calc(0px - var(--tab-min-height) - var(--tab-block-margin) * 2);
+  transform: rotateX(89.9deg);
+}
+#mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts,#selection-shortcut-action-panel,#chat-shortcuts-options-panel,#tab-preview-panel)) ~ toolbox #urlbar[popover],
+#navigator-toolbox:is(:hover,:focus-within,[movingtab]) #urlbar[popover],
+#urlbar-container > #urlbar[popover]:is([focused],[open]){
+  pointer-events: auto;
+  opacity: 1;
+  transition-delay: 33ms;
+  transform: rotateX(0deg);
+}
+#mainPopupSet:has(> [panelopen]:not(#ask-chat-shortcuts,#selection-shortcut-action-panel,#chat-shortcuts-options-panel,#tab-preview-panel)) ~ toolbox,
+#navigator-toolbox:has(#urlbar:is([open],[focus-within])),
+#navigator-toolbox:is(:hover,:focus-within,[movingtab]){
+  transition-delay: 33ms !important;
+  transform: rotateX(0);
+  opacity: 1;
+}
+@media (-moz-bool-pref: "userchrome.autohide-toolbox.unhide-by-native-ui.enabled"),
+      (-moz-pref: "userchrome.autohide-toolbox.unhide-by-native-ui.enabled") {
+  :root[sizemode="maximized"]:not(:hover) #navigator-toolbox:not(:-moz-window-inactive),
+  :root[sizemode="maximized"]:not(:hover) #urlbar[popover]:not(:-moz-window-inactive) {
+    transition-delay: 33ms !important;
+    transform: rotateX(0) !important;
+    opacity: 1 !important;
+  }
+}
+
+#navigator-toolbox > *{ line-height: normal; pointer-events: auto }
+
+:root:not([sessionrestored]) #navigator-toolbox{ transform:none !important }
+
+:root[customizing] #navigator-toolbox{
+  position: relative !important;
+  transform: none !important;
+  opacity: 1 !important;
+}
+
+#navigator-toolbox[inFullscreen] > #PersonalToolbar,
+#PersonalToolbar[collapsed="true"]{ display: none }
+
+#urlbar[breakout][breakout-extend] > .urlbar-input-container{
+  padding-block: calc(min(4px,(var(--urlbar-container-height) - var(--urlbar-height)) / 2) + var(--urlbar-container-padding)) !important;
 }
